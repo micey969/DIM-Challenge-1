@@ -1,0 +1,129 @@
+---
+title: "Data in Motion: Challenge 1 - Chipotle"
+author: "Shazelle"
+date: "2023-05-25"
+output: pdf_document
+---
+
+# Scenario
+
+You are a financial data analyst at Chipotle and your manager has tasked you with analyzing the most recent sales numbers. She has provided the following set of questions she would like answered.
+
+## Load Packages
+
+```{r}
+library(tidyverse)
+library(readr)
+```
+
+
+
+## Load Data
+
+```{r}
+url <- 'https://raw.githubusercontent.com/justmarkham/DAT8/master/data/chipotle.tsv'
+chipotle_df <- read.csv(url, sep = '\t')
+```
+
+
+
+## View Data
+
+```{r}
+View(chipotle_df)
+```
+
+` `
+
+Question 1. Which was the most-ordered item?
+
+```{r}
+#group the data by the item names and sum the total quantity
+grouped_chipotle_df <- chipotle_df %>% group_by(item_name) %>% 
+summarise(quantity = sum(quantity)) %>% arrange(-quantity)
+```
+
+
+```{r}
+#return the top highest value
+head(grouped_chipotle_df,1)
+```
+
+` `
+
+Question 2. For the most-ordered item, how many items were ordered?
+
+```{r}
+max(grouped_chipotle_df$quantity)
+```
+
+` `
+
+Question 3. What was the most ordered item in the choice_description column?
+
+```{r}
+#change all NULL values to NA
+chipotle_df[chipotle_df=="NULL"] <- NA
+```
+
+
+```{r}
+#omit all NA values during the grouping and count
+choice_chipotle_df <- na.omit(chipotle_df) %>% group_by(choice_description) %>% 
+summarise(total_count=n(),.groups = 'drop') %>% arrange(-total_count)
+```
+
+
+```{r}
+#return top highest value
+head(choice_chipotle_df,1)
+```
+
+` `
+
+Question 4. How many items were ordered in total?
+
+```{r}
+sum(chipotle_df$quantity)
+```
+
+` `
+
+Question 5. Turn the item price into a float.
+
+```{r}
+#omit the dollar sign then convert item price to float
+chipotle_df$item_price <- as.double(gsub('[$,]','', chipotle_df$item_price))
+str(chipotle_df)
+```
+
+` `
+
+Question 6. How much was the revenue for the period in the dataset?
+
+```{r}
+sum(chipotle_df$item_price)
+```
+
+` `
+
+Question 7. How many orders were made in the period?
+
+```{r}
+n_distinct(chipotle_df$order_id)
+```
+
+` `
+
+Question 8. What is the average revenue amount per order?
+
+```{r}
+mean(chipotle_df$item_price)
+```
+
+` `
+
+Question 9. How many different items are sold?
+```{r}
+count(grouped_chipotle_df)
+```
