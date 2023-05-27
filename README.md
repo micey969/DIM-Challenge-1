@@ -3,7 +3,7 @@
 You are a financial data analyst at Chipotle and your manager has tasked you with analyzing the most recent sales numbers. She has provided the following set of questions she would like answered.
 
 ## Get the Data
-Link to dataset: Link to dataset: https://raw.githubusercontent.com/justmarkham/DAT8/master/data/chipotle.tsv
+Link to dataset: https://raw.githubusercontent.com/justmarkham/DAT8/master/data/chipotle.tsv
 
 ## Challenge Questions
 
