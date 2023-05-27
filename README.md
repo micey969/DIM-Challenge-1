@@ -16,3 +16,5 @@ Link to dataset: Link to dataset: https://raw.githubusercontent.com/justmarkham/
     How many orders were made in the period?
     What is the average revenue amount per order?
     How many different items are sold?
+
+Challenge by [Data In Motion](https://d-i-motion.com/lessons/challenge-1-chipotle-sales/)
